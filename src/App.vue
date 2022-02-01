@@ -1,10 +1,33 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link :to="{ name: 'About'}">About</router-link>
+    <router-link :to="{ name: 'Jobs'}">Jobs</router-link>
   </div>
+  <button @click="redirect">Redirect</button>
+  <button @click="back">Go back</button>
+  <button @click="foward">Go foward</button>
   <router-view/>
 </template>
+
+<script>
+export default {
+  methods: {
+    redirect(){
+      // this happens by pushing a route to the history
+      this.$router.push({ name:'Home'})
+    },
+    back(){
+      // we use the $route to access info about the route but the $router to move through the routes
+      // -1 means to go back in history with one step ,-2 with two steps
+      this.$router.go(-1);
+    },
+    foward(){
+      this.$router.go(1)
+    },
+  }
+}
+</script>
 
 <style>
 #app {
@@ -26,5 +49,11 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+button{
+  margin:0 10px;
+  padding:10px;
+  border:none;
+  border-radius: 5px;
 }
 </style>
