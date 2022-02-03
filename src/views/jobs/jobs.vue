@@ -15,12 +15,15 @@
 export default {
     data (){
         return {
-            jobs:[
-                {title:'backend developer',id:1,detail:'python with django'},
-                {title:'frontend developer',id:2,detail:'javascript with vue'},
-                {title:'UX designer',id:3,detail:'figma'}
-            ]
+            jobs:[]
         }
+    },
+    mounted () {
+        fetch('http://localhost:3000/jobs')
+            .then(res => res.json())
+            .then(data => this.jobs=data)
+            .catch(err => console.log(err.message))
+
     }
 
 }
